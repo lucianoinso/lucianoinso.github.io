@@ -7,7 +7,7 @@ function setup() {
 
 function draw() {
   background(197, 230, 227);
-  s = int(millis()/1000) % 21;
+  s = int(millis()/1000) % 19;
 
   if (s < 4) bug.grow();
   else if(s >= 4 && s < 11) bug.stay();
