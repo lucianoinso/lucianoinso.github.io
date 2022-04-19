@@ -14,9 +14,9 @@ function draw() {
 
   textSize(14);
   bug.display()
-  fill(255, 255, 255);
-  noStroke();
-  text('Time:' + s, width/2 - 24, height - 20);
+  // fill(255, 255, 255);
+  // noStroke();
+  // text('Time:' + s, width/2 - 24, height - 20);
 }
 
 class Jitter {
