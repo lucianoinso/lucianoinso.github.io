@@ -3,27 +3,46 @@ let bug;
 function setup() {
   createCanvas(400, 400);
   bug = new Jitter();
+  time_x_pos = width / 2 - 6
+  time_y_pos = height / 2 + 6
+  textSize(20);
 }
 
 function draw() {
   background(197, 230, 227);
   s = int(millis()/1000) % 19;
 
-  if (s < 4) bug.grow();
-  else if(s >= 4 && s < 11) bug.stay();
-  else if(s >= 11 && s < 19) bug.shrink();
-  textSize(14);
-  bug.display()
-  fill(255, 255, 255);
-  noStroke();
-  text('Time:' + s, width/2 - 24, height - 20);
+  if (s < 4){  
+    bug.grow();
+    bug.display()
+    fill(255, 255, 255);
+    noStroke();
+    text((s + 1), time_x_pos, time_y_pos);
+  }
+  else if(s >= 4 && s < 11) {
+    bug.stay();
+    bug.display()
+    fill(255, 255, 255);
+    noStroke();
+    text((s - 3), time_x_pos, time_y_pos);
+  }
+  else if(s >= 11 && s < 19) {
+    bug.shrink();
+    bug.display()
+    fill(255, 255, 255);
+    noStroke();
+    text((s - 10), time_x_pos, time_y_pos);
+  }
+  //fill(255, 255, 255);
+  //noStroke();
+  //text('Time:' + s, width/2 - 24, height - 20);
 }
 
 class Jitter {
   constructor() {
     this.x = width / 2;
     this.y = height / 2;
-    this.diameter = 10;
+    this.diameter = 34;
   }
 
   grow() {
@@ -31,7 +50,7 @@ class Jitter {
   }
   
   shrink() {
-    if(this.diameter > 10)
+    if(this.diameter > 34)
       this.diameter -= 0.5;
   }
 
