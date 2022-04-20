@@ -4,17 +4,36 @@
     <script src="4-7-8.js"></script>
     <title>4-7-8</title>
   <style>
-  #instructions {
-    width: 400px;
-    height: 400px;
-    font-family: helvetica;
-    font-size:14;
-  }
+    #instructions {
+      width: 400px;
+      height: 400px;
+      font-family: helvetica;
+      font-size:14;
+    }
+
+    #resetButton {
+      margin-top: -50px;
+      margin-left: 333px;
+      width:60px;
+      height:30px;
+	    background-color:#79bbff;
+	    background-color:rgb(67, 140, 128);
+	    border-radius:6px;
+	    border:1px solid #84bbf3;
+	    display:inline-block;
+	    cursor:pointer;
+	    color:#ffffff;
+	    font-family: helvetica;
+	    font-size:15px;
+	    text-decoration:none;
+	    text-shadow:0px 1px 0px #528ecc;
+    }
   </style>
   </head>
   <body>
     <main>
     </main>
+    <button type=button" id="resetButton">Reset</button>
     <div id="instructions">
       <p>
         Instructions: <br>
@@ -23,5 +42,11 @@
         3) Breath out through your mouth for 8 seconds. <br>
       </p>
     </div>
+    <script>
+      document.getElementById('resetButton').addEventListener('click', function(){
+          location.reload();
+          return false;
+      });
+    </script>
   </body>
 </html>
