@@ -47,7 +47,7 @@ class Jitter {
   }
 
   grow() {
-    if(this.diameter < 228)
+    if(this.diameter < 300)
       this.diameter += 1;
   }
   
