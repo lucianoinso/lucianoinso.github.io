@@ -33,9 +33,6 @@ function draw() {
     noStroke();
     text((s - 10), time_x_pos, time_y_pos);
   }
-  //fill(255, 255, 255);
-  //noStroke();
-  //text('Time:' + s, width/2 - 24, height - 20);
 }
 
 class Jitter {
@@ -45,8 +42,13 @@ class Jitter {
     this.diameter = 34;
   }
 
+  reset() {
+    this.diameter = 34;
+  }
+
   grow() {
-    this.diameter += 1;
+    if(this.diameter < 228)
+      this.diameter += 1;
   }
   
   shrink() {
@@ -55,7 +57,11 @@ class Jitter {
   }
 
   stay() {
-    this.diameter = this.diameter;
+    // do nothing
+  }
+  
+  get_diameter() {
+    return this.diameter
   }
   
   display() {
