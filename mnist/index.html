@@ -1,0 +1,95 @@
+<html>
+<head>
+    <style>
+        body{
+          background-color:#DDD;
+          font-family: verdana;
+        }
+
+        #canvas {
+          background-color:white;
+        }
+
+        #result {
+          margin-top:10px;
+        }
+        .prediction{
+          display:inline;
+          width:80px;
+        }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <canvas id='canvas' width="128" height="128">
+    </canvas>
+    <div id="classif-button" style="margin-top:10px">
+            <button id="upload" onclick="send_image()">Classify</button>
+    </div>
+    <div id="result">
+        <div id="result">Is the number: <div class="prediction"></div></div>
+    </div>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+
+        var pos = { x: 0, y: 0 };
+
+        document.addEventListener('mousemove', draw);
+        document.addEventListener('mousedown', setPosition);
+        document.addEventListener('mouseenter', setPosition);
+
+        function setPosition(e) {
+          pos.x = e.clientX;
+          pos.y = e.clientY;
+        }
+
+        function draw(e) {
+          if (e.buttons !== 1) return;
+
+          ctx.beginPath(); // begin
+
+          ctx.lineWidth = 10;
+          ctx.lineCap = 'round';
+          ctx.strokeStyle = '#000000';
+
+          ctx.moveTo(pos.x, pos.y);
+          setPosition(e);
+          ctx.lineTo(pos.x, pos.y);
+
+          ctx.stroke();
+        }
+    </script>
+    <script>
+        function ajax_call(ajaxurl) {
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var dataURL = canvas.toDataURL();
+            return $.ajax({
+                type: "POST",
+                url: ajaxurl,
+                data:{
+                    imageBase64: dataURL
+                }
+            }).done(function() {
+              console.log('sent');
+            });
+        }
+
+        async function send_image() {
+          try {
+            const res = await ajax_call('http://127.0.0.1:5000/predict')
+            console.log(res);
+            document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
+          } catch(err) {
+            console.log(err);
+          }
+        }
+        
+    </script>
+
+</body>
+
+</html>
+
