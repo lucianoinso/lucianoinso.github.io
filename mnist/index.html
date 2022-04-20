@@ -41,7 +41,7 @@
         var canvas = document.getElementById('canvas');
         var ctx = canvas.getContext('2d');
 
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         var pos = { x: 0, y: 0 };
@@ -62,7 +62,7 @@
 
           ctx.lineWidth = 10;
           ctx.lineCap = 'round';
-          ctx.strokeStyle = '#000000';
+          ctx.strokeStyle = '#FFF';
 
           ctx.moveTo(pos.x, pos.y);
           setPosition(e);
@@ -76,7 +76,7 @@
             var canvas = document.getElementById('canvas');
             ctx = canvas.getContext("2d");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "white";
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             document.getElementsByClassName('prediction')[0].innerHTML = '';
         }
