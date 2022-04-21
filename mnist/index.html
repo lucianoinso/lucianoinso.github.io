@@ -31,7 +31,7 @@
           height:234px;
         }
     </style>
-    <script src="libs/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div id="content">
@@ -117,8 +117,7 @@
 
         async function send_image() {
           try {
-            // const res = await ajax_call('http://127.0.0.1:5000/predict');
-            const res = await ajax_call('http://192.168.100.2:5000/predict');
+            const res = await ajax_call('http://127.0.0.1:5000/predict');
             alert(res['message']);
             document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
           } catch(err) {
