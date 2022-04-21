@@ -73,7 +73,7 @@
         }
 
         function draw(e) {
-          //if (e.buttons !== 1) return;
+          if (e.type === 'mousemove' && e.buttons !== 1) return;
 
           ctx.beginPath();
 
