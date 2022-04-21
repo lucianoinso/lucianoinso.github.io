@@ -4,8 +4,6 @@
         body{
           background-color:#DDD;
           font-family: verdana;
-          width:200px !important;
-          height:260px !important;
         }
 
         #canvas {
@@ -35,8 +33,7 @@
 </head>
 <body>
     <div id="content">
-        <canvas id='canvas' width="128" height="128">
-        </canvas>
+        <canvas id='canvas' width="128" height="128"></canvas>
         <div id="buttons" style="margin-top:10px">
                 <button id="upload" onclick="send_image()">Classify</button>
                 <button id="clear" onclick="clear_canvas()">Clear</button>
@@ -68,8 +65,8 @@
         function setPosition(e) {
           var source = e.touches ? e.touches[0] : e;
           
-          pos.x = source.clientX;
-          pos.y = source.clientY;
+          pos.x = source.clientX - 10;
+          pos.y = source.clientY - 10;
         }
 
         function draw(e) {
