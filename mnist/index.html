@@ -68,11 +68,6 @@
 
         function setPosition(e) {
           var source = e.touches ? e.touches[0] : e;
-          if(e.touches){
-              source = e.touches[0];
-          } else {
-              source = e;
-          }
           
           pos.x = source.clientX;
           pos.y = source.clientY;
@@ -81,7 +76,7 @@
         function draw(e) {
           //if (e.buttons !== 1) return;
 
-          ctx.beginPath(); // begin
+          ctx.beginPath();
 
           ctx.lineWidth = 10;
           ctx.lineCap = 'round';
@@ -123,9 +118,8 @@
 
         async function send_image() {
           try {
-            alert('lcdtpmjavascript');
             const res = await ajax_call('http://127.0.0.1:5000/predict');
-            console.log(res);
+            alert(res);
             document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
           } catch(err) {
             console.log(err);
