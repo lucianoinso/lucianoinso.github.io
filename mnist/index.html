@@ -50,9 +50,22 @@
         document.addEventListener('mousedown', setPosition);
         document.addEventListener('mouseenter', setPosition);
 
+        document.addEventListener("touchstart", setPosition, false);
+        document.addEventListener("touchmove", draw, false);
+        document.addEventListener("touchend", setPosition, false);
+        document.addEventListener("touchcancel", draw, false);
+
+
         function setPosition(e) {
-          pos.x = e.clientX;
-          pos.y = e.clientY;
+          var source = e.touches ? e.touches[0] : e;
+          if(e.touches){
+              source = e.touches[0];
+          } else {
+              source = e;
+          }
+          
+          pos.x = source.clientX;
+          pos.y = source.clientY;
         }
 
         function draw(e) {
