@@ -118,7 +118,7 @@
         async function send_image() {
           try {
             const res = await ajax_call('http://127.0.0.1:5000/predict');
-            alert(res);
+            alert(res['message']);
             document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
           } catch(err) {
             console.log(err);
