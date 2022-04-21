@@ -117,7 +117,8 @@
 
         async function send_image() {
           try {
-            const res = await ajax_call('http://127.0.0.1:5000/predict');
+            // const res = await ajax_call('http://127.0.0.1:5000/predict');
+            const res = await ajax_call('http://192.168.100.2:5000/predict');
             alert(res['message']);
             document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
           } catch(err) {
