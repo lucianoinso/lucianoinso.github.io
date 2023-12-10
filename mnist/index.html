@@ -117,7 +117,7 @@
 
         async function send_image() {
           try {
-            const res = await ajax_call('https://mnist-classifier-convnet.herokuapp.com/predict');
+            const res = await ajax_call('https://lucianoinso-mnist-digit-classifier.hf.space/');
             document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
           } catch(err) {
             console.log(err);
