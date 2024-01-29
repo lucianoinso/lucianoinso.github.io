@@ -9,19 +9,21 @@
               background-color:#DDD;
               font-family: verdana;
             }
+
             #canvas {
               touch-action: none;
               background-color:white;
             }
             #result {
               margin-top:10px;
+              font-size:14px;
             }
             .prediction{
               display:inline;
               width:80px;
             }
             #buttons{
-              width:128;
+              width:128px;
             }
             #buttons #clear{
               float:right;
@@ -40,12 +42,12 @@
         <div id="content">
             <canvas id='canvas' width="128" height="128"></canvas>
             <div id="buttons" style="margin-top:10px">
-                    <button id="upload" onclick="send_image()">Classify</button>
+                    <button id="upload" onclick="send_image()" title="Wait for the server to load up" disabled="true">Classify</button>
                     <button id="clear" onclick="clear_canvas()">Clear</button>
             </div>
             <div id="result">Is the number: <div class="prediction"></div></div>
             <br />
-            <div id="note"></div>
+            <div id="note">Server status: <span id="server-status" style="color:red">Starting... <br><br>Note: if server status is "Starting", please be patient, it's a free tier hosting that goes to sleep if not used in the previous 48 hours and starting up can take up to 20 seconds, once it has started it's super fast, I promess.</span></div>
         </div>
 
         <script>
@@ -102,23 +104,53 @@
         </script>
 
         <script>
-            function ajax_call(ajaxurl) {
+            function send_image_ajax(url) {
                 var canvas = document.getElementById('canvas');
                 var context = canvas.getContext('2d');
                 var dataURL = canvas.toDataURL();
                 return $.ajax({
                     type: "POST",
-                    url: ajaxurl,
+                    url: url,
                     data: { imageBase64: dataURL },
                     async: true,
                 }).done(function() {
-                  console.log('sent');
+                  console.log('Image sent');
                 });
+            }
+            
+            function check_server_ajax(url) {
+                return $.ajax({
+                    type: "GET",
+                    timeout: 10000,
+                    url: url,
+                    async: true,
+                }).done(function() {
+                  console.log('Checking server status...');
+                });
+            }
+
+            window.onload = async function check_server() {
+              try {
+                const res = await check_server_ajax('https://lucianoinso-mnist-digit-classifier.hf.space/');
+                if (res['message'] == "space running!") {
+                  const button = document.getElementById('upload');
+                  button.disabled = false;
+                  const status_message = document.getElementById("server-status")
+                  status_message.innerHTML = "Online";
+                  status_message.style = "color:green";
+                  console.log('Server running!');
+                }
+              } catch(err) {
+                console.log(err);
+                setTimeout(function() {
+                  check_server(); // Call the function again after the specified delay
+                }, 7000);
+              }
             }
 
             async function send_image() {
               try {
-                const res = await ajax_call('https://lucianoinso-mnist-digit-classifier.hf.space/');
+                const res = await send_image_ajax('https://lucianoinso-mnist-digit-classifier.hf.space/');
                 document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
               } catch(err) {
                 console.log(err);
