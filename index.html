@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <head>
-  <meta http-equiv='cache-control' content='no-cache'> 
-  <meta http-equiv='expires' content='0'> 
-  <meta http-equiv='pragma' content='no-cache'>
+  <meta http-equiv='cache-control' project-content='no-cache'>
+  <meta http-equiv='expires' project-content='0'>
+  <meta http-equiv='pragma' project-content='no-cache'>
   <title>Portfolio</title>
   <link rel="icon" type="image/x-icon" href="favicon.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
     body {
       background-color:#DDD;
       font-family: verdana;
     }
 
-    #content {
+    #projects-content {
       padding:10px;
       background-color:#eef3f7;
       width:359px;
@@ -47,59 +48,82 @@
     a:visited {
       color:black;
     }
-    
+
     a {
       color: #1144ee;
-    }    
+    }
   </style>
 </head>
 <body>
-<span class="title"><h1>Projects</h1></span>
-<div id="content">
-  <div class="category">
-    <div class="category-title">Bots</div>
-    <div class="item">CryptoTrading Bot<br></div>
-  </div>
+<div id="container">
+    <span class="title"><h1>Projects</h1></span>
+    <div id="projects-content">
+      <div class="category">
+        <div class="category-title">Bots</div>
+        <div class="item">CryptoTrading Bot<br></div>
+      </div>
 
-  <div class="category">
-    <div class="category-title">Websites / Systems</div>
-    <div class="item">Medical Records System</div>
-    <div class="item">Online Magazine: "Revista Menos Mal"</div>
-  </div>
+      <div class="category">
+        <div class="category-title">Websites / Systems</div>
+        <div class="item">Medical Records System</div>
+        <div class="item">Online Magazine: "Revista Menos Mal"</div>
+      </div>
 
-  <div class="category">
-    <div class="category-title">Computer Science</div>
-    <div class="item">Integrate and Fire Model</div>
-    <div class="item">Massive Graphs Coloring</div>
-    <div class="item">Predator-Prey Model</div>
-  </div>
+      <div class="category">
+        <div class="category-title">Computer Science</div>
+        <div class="item">Integrate and Fire Model</div>
+        <div class="item">Massive Graphs Coloring</div>
+        <div class="item">Predator-Prey Model</div>
+      </div>
 
-  <div class="category">
-    <div class="category-title">Data Science & Machine Learning</div>
-    <div class="item">House Price Predictor</div>
-    <div class="item">Lunar Lander (Deep Q-Learning)</div>
-    <div class="item"><a href="mnist/index.html">MNIST Classifier</a><br></div>
-    <div class="item">Realtime Video Classifier</div>
-  </div>
+      <div class="category">
+        <div class="category-title">Data Science & Machine Learning</div>
+        <div class="item">House Price Predictor</div>
+        <div class="item">Lunar Lander (Deep Q-Learning)</div>
+        <div class="item"><a href="mnist/index.html">MNIST Classifier</a><br></div>
+        <div class="item">Realtime Video Classifier</div>
+      </div>
 
-  <div class="category" style="clear:left">
-    <div class="category-title">Therapeutic</div>
-    <div class="item"><a href="breath/index.html">Breathing Techniques</a><br></div>
-  </div>
+      <div class="category" style="clear:left">
+        <div class="category-title">Therapeutic</div>
+        <div class="item"><a href="breath/index.html">Breathing Techniques</a><br></div>
+      </div>
 
-  <div class="category">
-    <div class="category-title">Videogames</div>
-    <div class="item">Pong</div>
-    <div class="item">Space shooter</div>
-  </div>
+      <div class="category">
+        <div class="category-title">Videogames</div>
+        <div class="item">Pong</div>
+        <div class="item">Space shooter</div>
+      </div>
 
-  <div class="category">
-    <div class="category-title">Procedural animation</div>
-    <div class="item">Day at the Beach</div>
-  </div>
+      <div class="category">
+        <div class="category-title">Procedural animation</div>
+        <div class="item">Day at the Beach</div>
+      </div>
+    </div>
 </div>
 <footer>
 <span id="under-construction">🚧 This website is currently under construction! Please check back soon for exciting updates. Thank you for your patience! 🛠️</span>
 </footer>
+
+<script>
+    function check_server_ajax(url) {
+        return $.ajax({
+            type: "GET",
+            timeout: 1000,
+            url: url,
+            async: true,
+        }).done(function() {
+          console.log('Sent signal for machine learning hosting to start up');
+        });
+    }
+
+    window.onload = async function check_server() {
+      try {
+        const res = await check_server_ajax('https://lucianoinso-mnist-digit-classifier.hf.space/');
+      } catch(err) {
+        console.log(err);
+      }
+    }
+</script>
 </body>
 </html>
