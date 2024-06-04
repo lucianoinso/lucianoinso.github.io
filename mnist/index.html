@@ -105,6 +105,8 @@
         </script>
 
         <script>
+            const server_uri = 'http://lucianoinso.pythonanywhere.com/'
+
             function send_image_ajax(url) {
                 var canvas = document.getElementById('canvas');
                 var context = canvas.getContext('2d');
@@ -132,8 +134,8 @@
 
             window.onload = async function check_server() {
               try {
-                const res = await check_server_ajax('https://lucianoinso-mnist-digit-classifier.hf.space/');
-                if (res['message'] == "space running!") {
+                const res = await check_server_ajax(server_uri);
+                if (res['message'] == "Server running!") {
                   const button = document.getElementById('upload');
                   button.disabled = false;
                   const status_message = document.getElementById("server-status")
@@ -151,8 +153,10 @@
 
             async function send_image() {
               try {
-                const res = await send_image_ajax('https://lucianoinso-mnist-digit-classifier.hf.space/');
-                document.getElementsByClassName('prediction')[0].innerHTML = res['message'] + "?";
+                const res = await send_image_ajax(server_uri);
+                const top_pred = res['message'][0];
+                const second_best = res['message'][1];
+                document.getElementsByClassName('prediction')[0].innerHTML = top_pred + "?<br>(second best: " + second_best + ")";
               } catch(err) {
                 console.log(err);
               }
